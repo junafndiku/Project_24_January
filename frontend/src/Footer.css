@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+ }
+
+
+.footer-container {
+  background-color: #3a50e0;
+  color: white;
+  font-style: oblique;
+  font-size: 13px;
+  padding: 10px 50px;  
+  height: 200px;
+
+  
+}
+
+/* Headings */
+.footer-heading {
+  font-weight: bold;
+}
+
+/* Mission section */
+.footer-mission-heading {
+  margin-left: 10%;
+}
+
+.footer-image {
+  height: 100px;
+  width: auto;
+  margin-left: 15%;
+}
+
+/* Centered content (Contact & Brand sections) */
+.footer-centered {
+  margin: 0 auto;
+  width: fit-content;
+}
+
+/* Contact section spacing */
+.footer-contact h3 {
+  margin-bottom: 11px;
+}

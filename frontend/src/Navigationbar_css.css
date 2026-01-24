@@ -1,0 +1,28 @@
+.navbarStyle {
+    background-color: #3a50e0;
+    height: 100px;
+    font-style:oblique;
+    font-size: 20px;
+
+}
+
+.imgStyle {
+  display: flex;
+  gap: 3px;
+  align-items: flex-start;
+}
+
+.nav-link-custom {
+  color: white;             /* text-light effect */
+  font-size: 18px;          /* adjust font size */
+  margin-left: 15px;        /* space from previous element */
+  transition: color 0.3s ease;
+}
+
+.nav-link-custom:hover {
+
+  font-weight: 700;         /* bold on hover */
+  cursor: pointer;    
+  color: white; 
+}
+

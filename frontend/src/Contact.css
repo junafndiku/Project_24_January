@@ -1,0 +1,31 @@
+/* Main container */
+.helper-container {
+  margin-top: 30px;
+  border: 1px solid #dee2e6; /* matches bootstrap border */
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin-bottom: 30px;
+  background-color: #fff; /* optional for better visibility */
+}
+
+/* Headings */
+.helper-container h5 {
+  margin-bottom: 0.5rem;
+}
+
+.helper-container h6 {
+  margin-bottom: 1rem;
+  font-weight: normal;
+}
+
+/* Form spacing */
+.helper-form {
+  margin-top: 10px;
+}
+
+.imgStyle {
+    display: block;
+    margin: 20px auto; 
+    width: 120px;
+    height: auto;
+}
