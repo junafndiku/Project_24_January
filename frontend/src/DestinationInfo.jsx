@@ -12,30 +12,30 @@ const DestinationInfo = () => {
         {
             id:1,
             title:"Albania",
+            region: "Albania",
             desc: "Discover Albania’s hidden gems—from pristine beaches along the Ionian coast to breathtaking mountains, rich history, and vibrant local culture waiting to be explored. ",
             image:img1,
-            path: "/test1",
         },
         {
             id:2,
             title:"Europe",
+            region: "Europe",
             desc: "Explore the wonders of Europe, from romantic cities and iconic landmarks to scenic countryside and vibrant cultures. ",
             image:img2,
-            path: "/test2",
         },
         {
             id:3,
             title:"Middle East",
+            region: "Middle East",
             desc: " Discover the Middle East’s rich history and vibrant cultures.",
             image:img3,
-            path: "/test3",
         },
         {
             id:4,
             title:"Far East",
+            region: "Far East",
             desc: " Experience the Far East’s vibrant cultures, ancient traditions, and breathtaking landscapes. ",
             image:img4,
-            path: "/test4",
         },
     ];
 
@@ -45,15 +45,13 @@ const DestinationInfo = () => {
         <Row >
             {infos.map((info) => {
                 return (
-                    <Col md={6} className="mb-5" >
+                    <Col md={6} className="mb-5" key={info.id}>
                         <OurDestinations {...info} />
                     </Col>
                 );
             })}
         </Row>
-
     </Container>
-    
   );
 }
 

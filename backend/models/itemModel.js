@@ -12,7 +12,7 @@ type: String,
 },
 packageRegion: {
 type: String,
-enum: ["Albania", "Europe", "Middle East", "Far East"]
+enum: ["Albania", "Europe", "Middle East", "Far East"],
 //required: true,
 },
 packageDestination: {
@@ -20,16 +20,16 @@ type: String,
 //required: true,
 },
 packageDays: {
-      type: number,
+      type: Number,
       //required: true,
-    },
+},
     packageTransportation: {
       type: String,
-      enum: ["airplane", "train", "private car", "cruise"]
+      enum: ["airplane", "train", "private car", "cruise"],
       //required: true,
     },
     packagePrice: {
-      type: number,
+      type: Number,
       //required: true,
     },
     packageImage: {

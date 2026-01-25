@@ -7,14 +7,14 @@ const ReadAllPackages = () => {
   useEffect(() => {
     const allitems = async () => {
       await axios.get("http://localhost:5000/readAll/")
-        .then(res => setItems([res.data]))
+        .then(res => setItems(res.data))
         .catch(err => console.log("Items not read " + err))
     };
     allitems()
   }, [])
   return (
     <Container>
-      <h1>Read All Items</h1>
+      <h1 className="mb-4 mt-4 text-center">Read All Items</h1>
       <Table striped bordered hover>
         <thead>
           <tr>

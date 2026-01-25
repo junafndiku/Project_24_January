@@ -6,20 +6,21 @@ import travel from './images/travel.png';
 
 const Navigationbar = () => {
   return (
-    <Navbar expand="lg" className="navbarStyle" variant="dark">
+    <Navbar expand="lg" className="navbarStyle" >
       <Container>
-        <Navbar.Brand href="/" >
+        <Navbar.Brand href="/" style={{color: "white", fontWeight: "bold"}} >
         <div className="imgStyle">Global Wings<img src={travel} style={{height: "35px",width: "auto",objectFit: "contain"}}></img>
         </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto" >
             <Nav.Link href="/about" className="nav-link-custom">About us</Nav.Link>
             <Nav.Link href="/packages" className="nav-link-custom">Travel tours</Nav.Link>
             <Nav.Link href="/contact" className="nav-link-custom">Contact us</Nav.Link>
-            <Nav.Link href="/createPackage/">Create</Nav.Link>
-            <Nav.Link href="/readAll/">Read All</Nav.Link>
+            <Nav.Link href="/createPackage/" className="nav-link-custom">Create</Nav.Link>
+            <Nav.Link href="/readAll/" className="nav-link-custom">Read All</Nav.Link>
+            <Nav.Link href="/readTours/" className="nav-link-custom">Read Tours</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -9,25 +9,28 @@ import About from './About';
 import DestinationInfo from './DestinationInfo';
 import CreatePackage from "./CRUD/CreatePackage";
 import ReadAllPackages from './CRUD/ReadAllPackages';
+import ReadTours from './CRUD/ReadTours';
 
 
 function App() {
   return (
-    <>
+    <div className="page-container">
     <Navigationbar />
-      
-      
+
+    <div className="page-content">
       <Routes>
         {/*<Route path="/" element={<Home />} ></Route>*/}
-        <Route path="/contact" element={<Contact/>} ></Route>
-        <Route path="/about" element={<About/>} ></Route>
-        <Route path="/packages" element={<DestinationInfo/>} ></Route>
+        <Route path="/contact" element={<Contact/>} />
+        <Route path="/about" element={<About/>} />
+        <Route path="/packages" element={<DestinationInfo/>} />
         <Route path="/createPackage" element={ <CreatePackage />}/>
         <Route path="/readAll" element={<ReadAllPackages/>} />
-   
+        <Route path="/readTours" element={<ReadTours/>} />
+
       </Routes>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

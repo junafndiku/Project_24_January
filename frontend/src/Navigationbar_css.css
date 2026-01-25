@@ -3,7 +3,7 @@
     height: 100px;
     font-style:oblique;
     font-size: 20px;
-
+     color: white;
 }
 
 .imgStyle {
@@ -26,3 +26,20 @@
   color: white; 
 }
 
+
+@media (max-width: 992px) { /* breakpoint for lg */
+  .navbarStyle {
+    height: auto; /* let it expand vertically if needed */
+    padding: 10px 15px;
+  }
+
+  .nav-link-custom {
+    margin-left: 0; /* remove spacing for vertical menu */
+    padding: 5px 0;
+    font-size: 16px;
+  }
+
+  .imgStyle {
+    font-size: 20px;
+  }
+}

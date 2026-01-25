@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full viewport height */
+}
+.page-content {
+  flex: 1; /* this takes all the space above the footer */
+}

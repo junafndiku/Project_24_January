@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import "./Contact.css";
 import together from "./images/together.png"
@@ -13,17 +13,50 @@ const Contact = () => {
     comments: "",
   });
 
-  const handleChange = async (e) => {
+  const [msg, setMsg] = useState("");
+  const [submitted, setSubmitted] = useState(false); // Track if form was submitted
+
+  const checkContact = () => {
+    if(contact.name==="" || contact.phone ==="" || contact.email === "" || contact.region === "" || contact.comments===""){
+      setMsg("Please fiil in all the fields!")
+      return false;
+    }else{
+      setMsg("Thank you for reaching out to us! We will get back to you soon!");
+      return true;
+    }
+  }
+
+  const handleChange = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
-    await axios
-      .post("http://localhost:5000/", contact)
-      .then((res) => console.log("200 Added contact"))
-      .catch((err) => console.log("Error " + err));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitted(true); // Mark form as submitted
+    if(!checkContact()){
+      return;
+    }
+    await axios
+      .post("http://localhost:5000/addContact/", contact)
+      .then((res) => console.log("200 Added contact"))
+      .catch((err) => console.log("Error " + err));
+       setContact({
+      name: "",
+      phone: "",
+      email: "",
+      region: "",
+      comments: ""
+    });
   };
+
+  const decideAlert = () => {
+    if(msg==="Please fiil in all the fields!"){
+      return "danger";
+    }
+    else{
+      return "success";
+    }
+  }
 
   return (
     <Container className="helper-container">
@@ -50,7 +83,6 @@ const Contact = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="exampleForm.ControlNumber1">
           <Form.Label>Phone number</Form.Label>
           <Form.Control
@@ -61,7 +93,6 @@ const Contact = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -72,7 +103,6 @@ const Contact = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
         {/* Select starts here */}
         <Form.Label>Please select your target region</Form.Label>
         <Form.Group className="mb-3">
@@ -90,7 +120,6 @@ const Contact = () => {
           </Form.Select>
         </Form.Group>
         {/* Select ends here */}
-
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Label>Proposal / Comments</Form.Label>
           <Form.Control
@@ -101,7 +130,6 @@ const Contact = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
         <Form.Group className="mb-3">
           <Button variant="primary" type="submit">
             Submit
@@ -109,6 +137,15 @@ const Contact = () => {
         </Form.Group>
       </Form>
       {/* Form ends here */}
+
+      {/* Alert only shows after submission */}
+      {submitted && (
+        <p>
+          <Alert variant={decideAlert()}>
+            {msg}
+          </Alert>
+        </p>
+      )}
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Image } from "react-bootstrap";
+import { Container, Form, Button, Image, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./CreatePackage.css";
@@ -19,6 +19,27 @@ const CreatePackage = () => {
   });
 
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [msg, setMsg] = useState("");
+  const [submitted, setSubmitted] = useState(false); 
+
+  const checkPackage = () => {
+    if(newItem.packageName === "" || newItem.packageDescription === "" || newItem.packageRegion === "" || newItem.packageDestination === "" || newItem.packageDays === "" || newItem.packageTransportation === "" || newItem.packagePrice === "" || newItem.packageImage === ""){
+      setMsg("Please fill in all the fields!");
+      return false;
+    }else{
+      setMsg("Package created successfully!");
+      return true;
+    }
+  }
+
+  const decideAlert = () => {
+    if(msg==="Please fill in all the fields!"){
+      return "danger";
+    }
+    else{
+      return "success";
+    }
+  }
 
   const handleChange = (e) => {
     setNewItem({ ...newItem, [e.target.name]: e.target.value });
@@ -28,17 +49,19 @@ const CreatePackage = () => {
     setNewItem({ ...newItem, packageImage: e.target.files[0] });
     setUploadedImage(URL.createObjectURL(e.target.files[0]));
   };
-
  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setSubmitted(true);
+    if(!checkPackage()){
+      return;
+    }
     const formData = new FormData();
     Object.entries(newItem).forEach(([key, value]) => {
       formData.append(key, value);
     });
-
+  
     try {
       const res = await axios.post("http://localhost:5000/create/", formData);
       console.log(res.data);
@@ -46,11 +69,21 @@ const CreatePackage = () => {
     } catch (err) {
       console.log("Error server, Item not created " + err);
     }
-  };
+    setNewItem({
+    packageName: "",
+    packageDescription: "",
+    packageRegion: "",
+    packageDestination: "",
+    packageDays: "",
+    packageTransportation: "",
+    packagePrice: "",
+    packageImage: "",
+    })};
+
 
   return (
     <Container className="create-package-container">
-      <div>
+     
           <h1 className="form-title">Create</h1>
 
           <Form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -118,10 +151,10 @@ const CreatePackage = () => {
                 required
               >
                 <option value="">-- Select an option --</option>
-                <option value="Airplane">Airplane</option>
-                <option value="Train">Train</option>
-                <option value="Private car">Private car</option>
-                <option value="Cruise">Cruise</option>
+                <option value="airplane">Airplane</option>
+                <option value="train">Train</option>
+                <option value="private car">Private car</option>
+                <option value="cruise">Cruise</option>
               </Form.Select>
             </Form.Group>
 
@@ -157,16 +190,22 @@ const CreatePackage = () => {
           )}
 
           <div>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="buttonModel">
               Submit
             </Button>
         </div>
         </div>
 
           </Form>
-
+          {submitted && (
+                  <p>
+                    <Alert variant={decideAlert()}>
+                      {msg}
+                    </Alert>
+                  </p>
+                )}
         
-      </div>
+      
     </Container>
   );
 };

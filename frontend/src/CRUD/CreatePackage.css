@@ -9,6 +9,8 @@
   padding: 1rem;
 }
 
+
+
 .form-title {
   margin-bottom: 20px;
   font-weight: bold;
@@ -25,4 +27,8 @@
   width: 200px;
   height: auto;
   object-fit: contain;
+}
+
+.buttonModel {
+  margin: 5px;
 }

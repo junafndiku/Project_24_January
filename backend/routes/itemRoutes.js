@@ -31,13 +31,13 @@ cb(null, false)
 let upload = multer({ storage, fileFilter })
 
 
-app.post("/create/", upload.single('photo'), async (req, res) => {
+app.post("/create/", upload.single('packageImage'), async (req, res) => {
 try {
 // Merrja dhe ruajtja te dhenat nga frontend (input-et e form-es, React)
 const newItem = new itemModel({
 ...req.body,
 // Imazhi
-photo: req.file.filename });
+packageImage: req.file.filename });
 // Ruajtje e te dhenave ne mongo DB
 await newItem.save();
 console.log(newItem)
@@ -84,7 +84,7 @@ res.status(500).send("Info not shown " + err);
 
 
 // Perdoret metoda patch:update nje ose disa fusha
-app.patch("/update/:id/", upload.single('photo'), async (req, res) => {
+app.patch("/update/:id/", upload.single('packageImage'), async (req, res) => {
 try {
 // Marrja e vleres se id-se nga frontend (e merr nga useParams dhe
 //Route)
@@ -94,7 +94,7 @@ const itemId = req.params.id;
 const itemInfo = {...req.body};
 // Kontrolli nese imazhi/foto eshte ndryshuar
 if (req.file) {
-itemInfo.photo = req.file.filename;
+itemInfo.packageImage = req.file.filename;
 }
 // Update ne mongo DB
 // $set - tregon qe do te behet update me te dhenat e reja
