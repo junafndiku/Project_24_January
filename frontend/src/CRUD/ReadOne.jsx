@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Button, Card, Image, ListGroup } from "react-bootstrap";
+import { UserContext } from "../Auth/UserContext";
 
 const ReadOne = () => {
   const [item, setItem] = useState(null);
   const { id } = useParams();
   const nav = useNavigate();
+  const { userInfo } = useContext(UserContext); // authentication
 
   // Fetch single package
   useEffect(() => {
@@ -21,10 +23,13 @@ const ReadOne = () => {
     fetchItem();
   }, [id]);
 
-  // Delete package
+  // Delete package (only for admin)
   const handleDelete = async (id) => {
+    if (!userInfo || !userInfo.email) return; // block if not admin
     try {
-      await axios.delete(`http://localhost:5000/delete/${id}`);
+      await axios.delete(`http://localhost:5000/delete/${id}`, {
+        withCredentials: true, // send cookie for auth verification
+      });
       nav("/readAll");
     } catch (err) {
       console.error("Not deleted: ", err);
@@ -46,35 +51,30 @@ const ReadOne = () => {
           </Card.Body>
 
           <ListGroup className="list-group-flush">
-            <ListGroup.Item>
-              Destination: {item.packageDestination}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Trip duration: {item.packageDays} days
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Transport: {item.packageTransportation}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              Price: {item.packagePrice} $
-            </ListGroup.Item>
+            <ListGroup.Item>Destination: {item.packageDestination}</ListGroup.Item>
+            <ListGroup.Item>Trip duration: {item.packageDays} days</ListGroup.Item>
+            <ListGroup.Item>Transport: {item.packageTransportation}</ListGroup.Item>
+            <ListGroup.Item>Price: {item.packagePrice} $</ListGroup.Item>
           </ListGroup>
 
-          <Card.Body className="text-center">
-            <Button
-              variant="warning"
-              href={`/update/${item._id}`}
-              className="me-2"
-            >
-              Update
-            </Button>
-            <Button
-              variant="danger"
-              onClick={() => handleDelete(item._id)}
-            >
-              Delete
-            </Button>
-          </Card.Body>
+          {/* Only show Update/Delete if admin is logged in */}
+          {userInfo && userInfo.email && (
+            <Card.Body className="text-center">
+              <Button
+                variant="warning"
+                href={`/update/${item._id}`}
+                className="me-2"
+              >
+                Update
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() => handleDelete(item._id)}
+              >
+                Delete
+              </Button>
+            </Card.Body>
+          )}
         </Card>
       )}
     </Container>
@@ -82,3 +82,4 @@ const ReadOne = () => {
 };
 
 export default ReadOne;
+

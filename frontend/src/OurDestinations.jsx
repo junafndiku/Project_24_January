@@ -11,9 +11,13 @@ const OurDestinations = ({ image, title, desc, region }) => {
       <Card.Body>
         <Card.Title style={{fontWeight: "bold"}}>{title}</Card.Title>
         <Card.Text>{desc}</Card.Text>
-        <Button variant="primary" as={Link} to={`/readAll?packageRegion=${region}`}  > 
+        <Button variant="primary" as={Link} to={`/readTours`}  > 
           Learn more
         </Button>
+
+        {/*<Button variant="primary" as={Link} to={`/readAll?packageRegion=${region}`}  > 
+          Learn more
+        </Button>*/}
       </Card.Body>
     </Card>
   );

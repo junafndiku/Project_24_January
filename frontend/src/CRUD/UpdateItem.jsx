@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams, useNavigate } from 'react-router-dom';
 
 const UpdateItem = () => {
-  // 1. State must match your Mongoose Schema keys
+
   const [item, setItem] = useState({
     packageName: "",
     packageDescription: "",

@@ -1,30 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Container, Table, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "./UserContext";
 
 const UserProfile = () => {
+  const { userInfo, setUserInfo } = useContext(UserContext);
   const [items, setItems] = useState([]);
+  const nav = useNavigate();
 
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/readAll/", {
-          withCredentials: true,
-        });
-        setItems(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error("Items not read:", err);
-        setItems([]);
-      }
+    const allitems = async () => {
+      await axios
+        .get("http://localhost:5000/readAll/", { withCredentials: true })
+        .then((res) => {
+          const userItems = res.data.filter(
+            (item) => item.userItem === userInfo.id,
+          );
+          setItems(userItems);
+        })
+        .catch((err) => console.log("Items not read " + err));
     };
-    fetchItems();
-  }, []);
+    allitems();
+  }, [userInfo]);
 
   return (
-    <Container>
-      <h1 className="mb-4 mt-4 text-center">Admin Dashboard - All Packages</h1>
+    <Container className="mt-5">
+      <h1 className="mb-4 text-center">All Packages</h1>
+
       {items.length === 0 ? (
-        <p>No packages found.</p>
+        <p className="text-center">No packages available</p>
       ) : (
         <Table striped bordered hover responsive>
           <thead>

@@ -11,44 +11,28 @@ const LogIn = () => {
     password: "",
   });
   const nav = useNavigate();
-
   const handleChange = (e) => {
     setUserLog({ ...userLog, [e.target.name]: e.target.value });
   };
-
-  // If admin already logged in, redirect to admin dashboard (ReadAll)
   useEffect(() => {
     if (userInfo && userInfo.id) {
-      nav("/readAll");
+      nav("/user");
     }
   }, [userInfo, nav]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      // Login request
-      await axios.post(
-        "http://localhost:5000/admin/login",
-        userLog,
-        { withCredentials: true }
-      );
-
-      // Fetch admin info after login
-      const res = await axios.get("http://localhost:5000/admin/me", {
-        withCredentials: true,
-      });
-
-      setUserInfo(res.data);
-      nav("/readAll"); // redirect to admin page
-    } catch (err) {
-      console.log("Login failed:", err.response?.data || err.message);
-      alert("Invalid email or password");
-    }
+    await axios
+      .post("http://localhost:5000/login/", userLog, { withCredentials: true })
+      .then((res) => nav("/user/"))
+      .catch((err) => console.log("Error not loged" + err));
+    const userRes = await axios.get("http://localhost:5000/user", {
+      withCredentials: true,
+    });
+    setUserInfo(userRes.data);
   };
-
   return (
     <Container>
-      <h1>Admin Login</h1>
+      <h1>Login Form</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email address</Form.Label>
@@ -57,7 +41,6 @@ const LogIn = () => {
             value={userLog.email}
             name="email"
             onChange={handleChange}
-            required
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
@@ -67,7 +50,6 @@ const LogIn = () => {
             value={userLog.password}
             name="password"
             onChange={handleChange}
-            required
           />
         </Form.Group>
         <Button variant="primary" type="submit">
@@ -77,6 +59,4 @@ const LogIn = () => {
     </Container>
   );
 };
-
 export default LogIn;
-
