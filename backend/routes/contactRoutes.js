@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const contactModel = require("../models/contactModel");
-app.post("/addContact/", async (req,res) => {
+app.post("/addContact", async (req,res) => {
     try {
         console.log(req.body)
         const newContact = new contactModel(req.body);

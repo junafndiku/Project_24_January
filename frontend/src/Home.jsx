@@ -84,7 +84,7 @@ const Home = () => {
   <div className="cta-text">
     Ready for your next adventure? Explore our travel tours and find the
     perfect vacation for you. Click
-    <a href="/Contact"> here </a>
+    <a href="/packages"> here </a>
      to start planning your trip and book your escape plan!
   </div>
   <img

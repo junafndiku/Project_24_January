@@ -67,7 +67,7 @@ res.status(500).send("Date not shown" + err);
 });
 
 
-app.get("/readOne/:id/", async (req, res) => {
+app.get("/readOne/:id", async (req, res) => {
 try {
 // Marrja e vleres se id-se nga frontend (e merr nga useParams dhe /Route)
 const itemId = req.params.id;
@@ -129,3 +129,5 @@ res.status(200).send("Item Deleted");
 // Nese ka gabime nga ana e funksionit
 console.log("Item not deleted " + err);
 res.status(500).send("Item not deleted " + err); }});
+
+module.exports = app;

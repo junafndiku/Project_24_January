@@ -1,4 +1,5 @@
 
+
 import './App.css';
 import Contact from './Contact';
 import Navigationbar from './Navigationbar';
@@ -10,6 +11,8 @@ import DestinationInfo from './DestinationInfo';
 import CreatePackage from "./CRUD/CreatePackage";
 import ReadAllPackages from './CRUD/ReadAllPackages';
 import ReadTours from './CRUD/ReadTours';
+import ReadOne from "./CRUD/ReadOne";
+import UpdateItem from "./CRUD/UpdateItem";
 
 
 function App() {
@@ -26,6 +29,9 @@ function App() {
         <Route path="/createPackage" element={ <CreatePackage />}/>
         <Route path="/readAll" element={<ReadAllPackages/>} />
         <Route path="/readTours" element={<ReadTours/>} />
+        <Route path="/readOne/:id" element={<ReadOne />} />
+          <Route path="/createPackage" element={<CreatePackage />} />
+          <Route path="/update/:id" element={<UpdateItem />} />
 
       </Routes>
       </div>
@@ -35,3 +41,4 @@ function App() {
 }
 
 export default App;
+

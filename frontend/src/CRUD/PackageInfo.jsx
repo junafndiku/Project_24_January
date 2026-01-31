@@ -11,6 +11,8 @@ const PackageInfo = ({
   packagePrice,
   packageRegion,
 }) => {
+
+  
   return (
     <Card style={{ width: "25rem" }}>
       <Image

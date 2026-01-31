@@ -2,152 +2,162 @@ import React, { useState } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import "./Contact.css";
-import together from "./images/together.png"
+import together from "./images/together.png";
 
 const Contact = () => {
   const [contact, setContact] = useState({
-    name: "",
+    Name: "",
     phone: "",
     email: "",
     region: "",
-    comments: "",
+    comment: "",
   });
 
   const [msg, setMsg] = useState("");
-  const [submitted, setSubmitted] = useState(false); // Track if form was submitted
+  const [submitted, setSubmitted] = useState(false);
 
+  // ---------------- VALIDATION ----------------
   const checkContact = () => {
-    if(contact.name==="" || contact.phone ==="" || contact.email === "" || contact.region === "" || contact.comments===""){
-      setMsg("Please fiil in all the fields!")
+    if (
+      contact.Name.trim() === "" ||
+      contact.phone.trim() === "" ||
+      contact.email.trim() === "" ||
+      contact.region.trim() === "" ||
+      contact.comment.trim() === ""
+    ) {
+      setMsg("Please fill in all the fields!");
       return false;
-    }else{
-      setMsg("Thank you for reaching out to us! We will get back to you soon!");
-      return true;
     }
-  }
 
-  const handleChange = (e) => {
-    setContact({ ...contact, [e.target.name]: e.target.value });
+    setMsg("Thank you for reaching out to us! We will get back to you soon!");
+    return true;
   };
 
+  // ---------------- INPUT HANDLER ----------------
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setContact({ ...contact, [name]: value });
+  };
+
+  // ---------------- SUBMIT ----------------
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true); // Mark form as submitted
-    if(!checkContact()){
-      return;
+    setSubmitted(true);
+
+    if (!checkContact()) return;
+
+    try {
+      await axios.post("http://localhost:5000/addContact", contact);
+      console.log("Contact saved");
+
+      // Reset form after successful submit
+      setContact({
+        Name: "",
+        phone: "",
+        email: "",
+        region: "",
+        comment: "",
+      });
+    } catch (err) {
+      console.error("Error saving contact:", err);
+      setMsg("Something went wrong. Please try again.");
     }
-    await axios
-      .post("http://localhost:5000/addContact/", contact)
-      .then((res) => console.log("200 Added contact"))
-      .catch((err) => console.log("Error " + err));
-       setContact({
-      name: "",
-      phone: "",
-      email: "",
-      region: "",
-      comments: ""
-    });
   };
 
+  // ---------------- ALERT STYLE ----------------
   const decideAlert = () => {
-    if(msg==="Please fiil in all the fields!"){
-      return "danger";
-    }
-    else{
-      return "success";
-    }
-  }
+    return msg === "Please fill in all the fields!" ? "danger" : "success";
+  };
 
   return (
     <Container className="helper-container">
-      <h4 style={{fontWeight: "bold"}}>
+      <h4 style={{ fontWeight: "bold" }}>
         Interested in partnering with us or exploring new business opportunities?
         We’re excited to hear your ideas and collaborate!
       </h4>
+
       <h6>
         Please leave your contact information and a brief description of your
-        proposal. Our team will get back to you promptly to discuss how we can
-        work together.
+        proposal. Our team will get back to you promptly.
       </h6>
-      <img src={together} className="imgStyle"></img>
 
-      {/* Form starts here */}
+      <img src={together} className="imgStyle" alt="Together" />
+
+      {/* ---------------- FORM ---------------- */}
       <Form className="helper-form" onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlName1">
+        <Form.Group className="mb-3">
           <Form.Label>Name and Surname</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Jon Smith"
-            value={contact.name}
-            name="name"
+            placeholder="John Smith"
+            name="Name"
+            value={contact.Name}
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlNumber1">
+
+        <Form.Group className="mb-3">
           <Form.Label>Phone number</Form.Label>
           <Form.Control
             type="text"
             placeholder="(+355) 686044497"
-            value={contact.phone}
             name="phone"
+            value={contact.phone}
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+
+        <Form.Group className="mb-3">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
             placeholder="name@example.com"
-            value={contact.email}
             name="email"
+            value={contact.email}
             onChange={handleChange}
           />
         </Form.Group>
-        {/* Select starts here */}
-        <Form.Label>Please select your target region</Form.Label>
+
         <Form.Group className="mb-3">
+          <Form.Label>Please select your target region</Form.Label>
           <Form.Select
-            aria-label="Default select example"
-            value={contact.region}
             name="region"
+            value={contact.region}
             onChange={handleChange}
           >
-            <option>Open this select menu</option>
-            <option value="1">Albania</option>
-            <option value="2">Europe</option>
-            <option value="3">Middle East</option>
-            <option value="4">Far East</option>
+            <option value="">Open this select menu</option>
+            <option value="Albania">Albania</option>
+            <option value="Europe">Europe</option>
+            <option value="Middle East">Middle East</option>
+            <option value="Far East">Far East</option>
           </Form.Select>
         </Form.Group>
-        {/* Select ends here */}
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+
+        <Form.Group className="mb-3">
           <Form.Label>Proposal / Comments</Form.Label>
           <Form.Control
             as="textarea"
             rows={3}
-            value={contact.comments}
-            name="comments"
+            name="comment"
+            value={contact.comment}
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form.Group>
-      </Form>
-      {/* Form ends here */}
 
-      {/* Alert only shows after submission */}
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+
+      {/* ---------------- ALERT ---------------- */}
       {submitted && (
-        <p>
-          <Alert variant={decideAlert()}>
-            {msg}
-          </Alert>
-        </p>
+        <Alert className="mt-3" variant={decideAlert()}>
+          {msg}
+        </Alert>
       )}
     </Container>
   );
 };
 
 export default Contact;
+
