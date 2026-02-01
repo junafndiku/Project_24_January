@@ -62,7 +62,7 @@ const SecondPart = () => {
               success stories.
             </p>
 
-            <Button variant="primary" href="/Contact">
+            <Button variant="primary" href="/addContact">
               🤝 Partner With Us
             </Button>
           </Col>

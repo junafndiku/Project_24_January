@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button, Image, ListGroup } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const PackageInfo = ({
   packageImage,
@@ -12,11 +13,21 @@ const PackageInfo = ({
   packageRegion,
 }) => {
 
-  
+  const navigate = useNavigate();
+
+  const handleBooking = () => {
+    // Navigate to reservation page and pass package info in state
+    navigate("/reservation", { 
+      state: { 
+        packageName: packageName, 
+        packageRegion: packageRegion 
+      } 
+    });
+  };
+
   return (
     <Card style={{ width: "30rem" }}>
       <Image
-        variant="top"
         src={`http://localhost:5000/images/${packageImage}`}
         style={{ height: "300px", objectFit: "cover" }}
       />
@@ -35,7 +46,10 @@ const PackageInfo = ({
       </ListGroup>
 
       <Card.Body>
-        <Button variant="primary">Book now</Button>
+        {/* Only use onClick with navigate; remove as={Link} */}
+        <Button variant="primary" onClick={handleBooking}>
+          Book Now
+        </Button>
       </Card.Body>
     </Card>
   );

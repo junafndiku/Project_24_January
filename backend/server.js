@@ -9,6 +9,7 @@ const path = require("path");
 const contactRoute = require("./routes/contactRoutes");
 const itemRoute = require("./routes/itemRoutes");
 const userRoute = require("./routes/userRoutes");
+const bookingRoute = require("./routes/bookRoutes");
 
 
 app.use(
@@ -42,6 +43,7 @@ mongoose
 app.use(contactRoute);
 app.use(itemRoute);
 app.use(userRoute);
+app.use(bookingRoute);
 
 
 app.use("/", (req, res) => {

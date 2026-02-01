@@ -14,6 +14,7 @@ import ProtectedRoute from "./Auth/ProtectedRoute";
 import { UserContextProvider } from "./Auth/UserContext";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
+import Reservation from './Reservation';
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
     <div className="page-content">
       <Routes>
         <Route path="/" element={<Home />} ></Route>
-
+        <Route path="/reservation" element={<Reservation />} />
         <Route path="/addContact" element={<Contact/>} />
         <Route path="/about" element={<About/>} />
         <Route path="/packages" element={<DestinationInfo/>} />
