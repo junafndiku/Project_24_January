@@ -14,7 +14,7 @@ const PackageInfo = ({
 
   
   return (
-    <Card style={{ width: "25rem" }}>
+    <Card style={{ width: "30rem" }}>
       <Image
         variant="top"
         src={`http://localhost:5000/images/${packageImage}`}
@@ -22,15 +22,16 @@ const PackageInfo = ({
       />
 
       <Card.Body>
-        <Card.Title>{packageName}</Card.Title>
+        <Card.Title><strong>{packageName}</strong></Card.Title>
         <Card.Text>{packageDescription}</Card.Text>
       </Card.Body>
 
       <ListGroup className="list-group-flush">
-        <ListGroup.Item>Destination: {packageDestination}</ListGroup.Item>
-        <ListGroup.Item>Trip duration: {packageDays} days</ListGroup.Item>
-        <ListGroup.Item>Transport: {packageTransportation}</ListGroup.Item>
-        <ListGroup.Item>Price: {packagePrice} $</ListGroup.Item>
+        <ListGroup.Item><strong>Region:</strong> {packageRegion}</ListGroup.Item>
+        <ListGroup.Item><strong>Destination:</strong> {packageDestination}</ListGroup.Item>
+        <ListGroup.Item><strong>Trip duration:</strong> {packageDays} days</ListGroup.Item>
+        <ListGroup.Item><strong>Transport:</strong> {packageTransportation}</ListGroup.Item>
+        <ListGroup.Item><strong>Price:</strong> {packagePrice} $</ListGroup.Item>
       </ListGroup>
 
       <Card.Body>

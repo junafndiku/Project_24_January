@@ -45,8 +45,8 @@ const About = () => {
                 <Card.Title style={{fontWeight: "bold"}}>Comprehensive Travel Services for an Unforgettable Journey</Card.Title>
                 <Card.Text>
                     <div style={{listStyleType: "none"}}>
-                    <li>-Booking Flights: Hassle-free airline reservations for domestic and international travel.</li>
-                    <li>-Hotel & Resort Reservations: Access to some of the world’s finest accommodations.</li>
+                    <li>✈️Booking Flights: Hassle-free airline reservations for domestic and international travel.</li>
+                    <li>🏨Hotel & Resort Reservations: Access to some of the world’s finest accommodations.</li>
                     </div>
         </Card.Text>
       </Card.Body>

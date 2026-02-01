@@ -37,21 +37,11 @@ const Navigationbar = () => {
       <Container>
         <Navbar.Brand
           as={Link}
-          to="/home"
+          to="/"
           style={{ color: "white", fontWeight: "bold" }}
         >
-          <div className="imgStyle">
+          <div style={{fontSize: "25px"}}>
             Global Wings
-            <img
-              src={travel}
-              alt="logo"
-              style={{
-                height: "35px",
-                width: "auto",
-                objectFit: "contain",
-                marginLeft: "8px",
-              }}
-            />
           </div>
         </Navbar.Brand>
 
@@ -70,16 +60,12 @@ const Navigationbar = () => {
               Contact us
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/readAll" className="nav-link-custom">
-              Read All
-            </Nav.Link>
-
             {userInfo.email ? (
               <>
                 <Nav.Link as={Link} to="/createPackage" className="nav-link-custom">Create</Nav.Link>
-                <Nav.Link as={Link} to="/user">Profile: {userInfo.username}</Nav.Link>
-
-                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                <Nav.Link as={Link} to="/readAll" className="nav-link-custom">Read All</Nav.Link>
+                <Nav.Link onClick={handleLogout} className="nav-link-custom">Logout</Nav.Link>
+                
               </>
             ) : (
               <>

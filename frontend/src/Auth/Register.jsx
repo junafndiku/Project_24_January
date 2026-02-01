@@ -1,28 +1,42 @@
 import React, { useState } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./LoginStyle.css";
 
 const Register = () => {
+
   const [newUser, setNewUser] = useState({
     username: "",
     email: "",
     password: "",
   });
+  const [msg, setMsg] = useState("");
+  const [variant, setVariant] = useState("success");
   const nav = useNavigate();
   const handleChange = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try{
     await axios
       .post("http://localhost:5000/register/", newUser)
       .then((res) => nav("/login"))
-      .catch((err) => console.log("Error not register" + err));
+      setMsg("Registration successful! Please log in!");
+      setVariant("success")
+    }
+      
+      catch(err){
+        console.log("Error not register" + err);
+        setMsg("Registration failed. Please try again.");
+        setVariant("danger")
+      }
   };
 
   return (
-    <Container>
+    <Container className="helper-container">
       <h1>Register Form</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="username">
@@ -55,6 +69,7 @@ const Register = () => {
         <Button variant="primary" type="submit">
           Register
         </Button>
+        <p>{msg && <Alert variant={variant} className="mt-3">{msg}</Alert>}</p>
       </Form>
     </Container>
   );

@@ -3,6 +3,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
+import "./LoginStyle.css";
 
 const LogIn = () => {
   const { userInfo, setUserInfo } = useContext(UserContext);
@@ -16,14 +17,14 @@ const LogIn = () => {
   };
   useEffect(() => {
     if (userInfo && userInfo.id) {
-      nav("/user");
+      nav("/");
     }
   }, [userInfo, nav]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
       .post("http://localhost:5000/login/", userLog, { withCredentials: true })
-      .then((res) => nav("/user/"))
+      .then((res) => nav("/readAll/"))
       .catch((err) => console.log("Error not loged" + err));
     const userRes = await axios.get("http://localhost:5000/user", {
       withCredentials: true,
@@ -31,7 +32,7 @@ const LogIn = () => {
     setUserInfo(userRes.data);
   };
   return (
-    <Container>
+    <Container className="helper-container">
       <h1>Login Form</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="email">

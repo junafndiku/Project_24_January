@@ -7,7 +7,7 @@ import agent from './images/agent.png';
 const Footer = () => {
 
     const containerStyle = {
-        backgroundColor: "#3a50e0",
+        backgroundColor: "#3c54f0",
         display: "flex",
         flexDirection: "column",
         minHeight: "50px",

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Image, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useParams, useNavigate } from 'react-router-dom';
+import "../Auth/LoginStyle.css";
 
 const UpdateItem = () => {
 
@@ -59,7 +60,7 @@ const UpdateItem = () => {
     });
 
     try {
-      // Endpoint must match your backend: app.patch("/update/:id/")
+
       await axios.patch(`http://localhost:5000/update/${id}/`, formData);
       nav("/readAll/");
     } catch (err) {
@@ -69,7 +70,7 @@ const UpdateItem = () => {
   };
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-4 helper-container">
       <h1 className="mb-4">Update Package</h1>
       {msg && <Alert variant="danger">{msg}</Alert>}
       

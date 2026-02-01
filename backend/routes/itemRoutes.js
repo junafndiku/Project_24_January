@@ -82,6 +82,24 @@ res.status(500).send("Info not shown " + err);
 }
 });
 
+app.get("/readByRegion/:region", async (req, res) => {
+  try {
+    // Marrja e vleres se region nga frontend (e merr nga URL /Route)
+    const region = req.params.region;
+
+    // Gjetja e elementeve sipas region-it te kerkuar
+    const items = await itemModel.find({ packageRegion: region });
+
+    // Kalimi i informacionit ne frontend
+    res.status(200).send(items);
+  } catch (err) {
+    // Nese ka gabime nga ana e funksionit
+    console.log("Info not shown " + err);
+    res.status(500).send("Info not shown " + err);
+  }
+});
+
+
 
 // Perdoret metoda patch:update nje ose disa fusha
 app.patch("/update/:id/", upload.single('packageImage'), async (req, res) => {
