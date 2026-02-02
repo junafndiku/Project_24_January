@@ -2,7 +2,6 @@ import './App.css';
 import Contact from './Contact';
 import Navigationbar from './Navigationbar';
 import { Routes, Route } from 'react-router-dom';
-import Home from './Home';
 import Footer from './Footer';
 import About from './About';
 import DestinationInfo from './DestinationInfo';
@@ -15,6 +14,7 @@ import { UserContextProvider } from "./Auth/UserContext";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import Reservation from './Reservation';
+import SecondPart from './SecondPart';
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
 
     <div className="page-content">
       <Routes>
-        <Route path="/" element={<Home />} ></Route>
+        <Route path="/" element={<SecondPart />} ></Route>
         <Route path="/reservation" element={<Reservation />} />
         <Route path="/addContact" element={<Contact/>} />
         <Route path="/about" element={<About/>} />

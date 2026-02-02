@@ -1,40 +1,40 @@
 .navbarStyle {
-    background-color: #3c54f0;
-    height: 100px;
-    font-style:oblique;
-    font-size: 20px;
-     color: white;
+  background-image: url("./images/cloud.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  height: 100px;
+  font-style: oblique;
+  font-size: 20px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  position: relative;
+
 }
 
+.navbarStyle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: -1;
+}
+
+.navbarStyle .container {
+  position: relative;
+  z-index: 2;
+}
 
 .nav-link-custom {
-  color: white;             /* text-light effect */
-  font-size: 20px;          /* adjust font size */
-  margin-left: 15px;        /* space from previous element */
-  transition: color 0.3s ease;
+  color: white;
+  font-size: 20px;
+  margin-left: 10px;
 }
 
 .nav-link-custom:hover {
-
-  font-weight: 700;         /* bold on hover */
-  cursor: pointer;    
-  color: white; 
-}
-
-
-@media (max-width: 992px) { /* breakpoint for lg */
-  .navbarStyle {
-    height: auto; /* let it expand vertically if needed */
-    padding: 10px 15px;
-  }
-
-  .nav-link-custom {
-    margin-left: 0; /* remove spacing for vertical menu */
-    padding: 5px 0;
-    font-size: 16px;
-  }
-
-  .imgStyle {
-    font-size: 20px;
-  }
+  font-weight: 700;
+  color: white;
 }

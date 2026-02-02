@@ -90,7 +90,7 @@ const Reservation = () => {
 
   return (
     <Container className="helper-container mt-5">
-      <h2 className="text-center mb-4">Book Your Trip to {packageName}</h2>
+      <h2 className="text-center mb-4">Book Your Trip</h2>
 
       <Form className="helper-form p-4 border rounded shadow-sm" onSubmit={handleSubmit}>
         

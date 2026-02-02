@@ -1,28 +1,48 @@
+/* Container centering (keep layout clean) */
 .containerStyle {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: center;  
-    margin-left: auto;
-    margin-right: auto;
+  display: flex;
+  justify-content: center;
 }
 
-.cardStyle {
-  display: block;          
-  width: 120px;            
-  height: 120px;           
-  object-fit: contain;     
-  margin: 0 auto 20px;   
-  
+/* Make cards equal height + slightly wider */
+.about-card {
+  height: 100%;
+  min-height: 400px;            
+  display: flex;
+  flex-direction: column;
+  width: 100%;                  /* allow column to define width */
+  max-width: 360px;             /* slightly wider than default */
+  margin: 0 auto;
 }
 
-/* Optional: make the card hover */
+/* Image always same size & full width */
+.cardImage {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+}
+
+/* Let body stretch to fill remaining space */
+.about-card .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Push text nicely */
+.about-card .card-text {
+  flex-grow: 1;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Hover effect */
 .card {
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }

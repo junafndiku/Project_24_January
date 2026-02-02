@@ -49,7 +49,7 @@ const Navigationbar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/about" className="nav-link-custom">
-              About us
+              ABOUT US
             </Nav.Link>
 
             <Nav.Link as={Link} to="/packages" className="nav-link-custom">
@@ -82,5 +82,4 @@ const Navigationbar = () => {
 };
 
 export default Navigationbar;
-
 
