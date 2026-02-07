@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, Button, Image, ListGroup } from "react-bootstrap";
+import { Card, Button, Badge } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+
 
 const PackageInfo = ({
   packageImage,
@@ -12,49 +13,71 @@ const PackageInfo = ({
   packagePrice,
   packageRegion,
 }) => {
-
   const navigate = useNavigate();
 
   const handleBooking = () => {
-    // Navigate to reservation page and pass package info in state
-    navigate("/reservation", { 
-      state: { 
-        packageName: packageName, 
-        packageRegion: packageRegion 
-      } 
+    navigate("/reservation", {
+      state: { packageName, packageRegion },
     });
   };
 
   return (
-    <Card style={{ width: "30rem" }}>
-      <Image
-        src={`http://localhost:5000/images/${packageImage}`}
-        style={{ height: "300px", objectFit: "cover" }}
-      />
+    <Card
+      style={{
+        width: "100%",
+        maxWidth: "350px",
+        borderRadius: "15px",
+        overflow: "hidden",
+        boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+      }}
+      className="package-card"
+    >
+      <div style={{ position: "relative" }}>
+        <img
+          src={`http://localhost:5000/images/${packageImage}`}
+          alt={packageName}
+          style={{ width: "100%", height: "220px", objectFit: "cover" }}
+        />
+        <Badge
+          bg="info"
+          style={{ position: "absolute", top: "10px", left: "10px", fontSize: "0.85rem" }}
+        >
+          {packageRegion}
+        </Badge>
+        <Badge
+          bg="secondary"
+          style={{ position: "absolute", top: "10px", right: "10px", fontSize: "0.85rem" }}
+        >
+          {packageDestination}
+        </Badge>
+      </div>
 
       <Card.Body>
-        <Card.Title><strong>{packageName}</strong></Card.Title>
-        <Card.Text>{packageDescription}</Card.Text>
-      </Card.Body>
+        <Card.Title style={{ fontWeight: "700", fontSize: "1.2rem" }}>
+          {packageName}
+        </Card.Title>
+        <Card.Text style={{ fontSize: "0.95rem", color: "#555" }}>
+          {packageDescription}
+        </Card.Text>
 
-      <ListGroup className="list-group-flush">
-        <ListGroup.Item><strong>Region:</strong> {packageRegion}</ListGroup.Item>
-        <ListGroup.Item><strong>Destination:</strong> {packageDestination}</ListGroup.Item>
-        <ListGroup.Item><strong>Trip duration:</strong> {packageDays} days</ListGroup.Item>
-        <ListGroup.Item><strong>Transport:</strong> {packageTransportation}</ListGroup.Item>
-        <ListGroup.Item><strong>Price:</strong> {packagePrice} $</ListGroup.Item>
-      </ListGroup>
+        <div className="d-flex justify-content-between mb-3" style={{fontWeight:"bold"}}>
+          <small>
+            <strong></strong> {packageDays} days
+          </small>
+          <small>
+            <strong>Transport:</strong> {packageTransportation}
+          </small>
+        </div>
 
-      <Card.Body>
-        {/* Only use onClick with navigate; remove as={Link} */}
-        <Button variant="primary" onClick={handleBooking}>
-          Book Now
-        </Button>
+        <div className="d-flex justify-content-between align-items-center">
+          <h5 style={{ fontWeight: "bold", color: "#0d6efd" }}>{packagePrice} $</h5>
+          <Button variant="primary" onClick={handleBooking}>
+            Book Now
+          </Button>
+        </div>
       </Card.Body>
     </Card>
   );
 };
 
 export default PackageInfo;
-
-

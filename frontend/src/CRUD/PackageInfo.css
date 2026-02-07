@@ -1,0 +1,102 @@
+.package-card {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.package-card:hover {
+  transform: translateY(-5px);
+}
+
+.package-img-container {
+  position: relative;
+  flex-shrink: 0; /* prevent image from shrinking */
+}
+
+.package-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.badge-left {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.85rem;
+}
+
+.badge-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.85rem;
+}
+
+.card-body {
+  flex: 1; /* allow card body to grow equally */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.package-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.package-desc {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.package-info {
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.package-price {
+  font-weight: bold;
+  color: #0d6efd;
+}
+
+/* -------------------- iPhone SE & small screens -------------------- */
+@media (max-width: 375px) {
+  .package-card {
+    max-width: 95%;
+    margin: 0 auto 1rem auto;
+  }
+
+  .package-img {
+    height: 200px;
+  }
+
+  .package-title {
+    font-size: 1.1rem;
+  }
+
+  .package-desc {
+    font-size: 0.9rem;
+  }
+
+  .package-info small {
+    font-size: 0.8rem;
+  }
+
+  .package-price {
+    font-size: 1rem;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+}

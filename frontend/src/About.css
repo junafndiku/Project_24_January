@@ -1,17 +1,17 @@
-/* Container centering (keep layout clean) */
+
 .containerStyle {
   display: flex;
   justify-content: center;
 }
 
-/* Make cards equal height + slightly wider */
+
 .about-card {
   height: 100%;
   min-height: 400px;            
   display: flex;
   flex-direction: column;
-  width: 100%;                  /* allow column to define width */
-  max-width: 360px;             /* slightly wider than default */
+  width: 100%;                
+  max-width: 360px;             
   margin: 0 auto;
 }
 
@@ -22,14 +22,14 @@
   object-fit: cover;
 }
 
-/* Let body stretch to fill remaining space */
+
 .about-card .card-body {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* Push text nicely */
+
 .about-card .card-text {
   flex-grow: 1;
   font-size: 15px;

@@ -50,28 +50,34 @@ const UpdateItem = () => {
     setShowImg(URL.createObjectURL(e.target.files[0]));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // 3. FormData is required for Multer to process images
-    const formData = new FormData();
-    Object.entries(item).forEach(([key, value]) => {
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData();
+
+  // Append text fields
+  Object.entries(item).forEach(([key, value]) => {
+    if (key !== "packageImage") {
       formData.append(key, value);
-    });
-
-    try {
-
-      await axios.patch(`http://localhost:5000/update/${id}/`, formData);
-      nav("/readAll/");
-    } catch (err) {
-      setMsg("Error updating item: " + err.message);
-      console.log("Error " + err);
     }
-  };
+  });
+
+  // Append image ONLY if a new file was selected
+  if (item.packageImage instanceof File) {
+    formData.append("packageImage", item.packageImage);
+  }
+
+  try {
+    await axios.patch(`http://localhost:5000/update/${id}`, formData);
+    nav("/readAll/");
+  } catch (err) {
+    setMsg("Error updating item: " + err.message);
+  }
+};
 
   return (
     <Container className="mt-4 helper-container">
-      <h1 className="mb-4">Update Package</h1>
+      <h1 className="mb-4">Update Travel tour</h1>
       {msg && <Alert variant="danger">{msg}</Alert>}
       
       <Form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -126,6 +132,16 @@ const UpdateItem = () => {
             type="number"
             name="packagePrice"
             value={item.packagePrice}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Duration (Days)</Form.Label>
+          <Form.Control
+            type="number"
+            name="packageDays"
+            value={item.packageDays}
             onChange={handleChange}
           />
         </Form.Group>

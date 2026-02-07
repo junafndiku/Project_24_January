@@ -3,6 +3,7 @@ import { Container, Row, Col, Image, Card, Button } from "react-bootstrap";
 import travelimg from "./images/mapi.jpg";
 import travel2 from "./images/newyork.jpg";
 import travel3 from "./images/lexi.jpg";
+import "./SecondPart.css";
 
 const SecondPart = () => {
   const titleStyle = {
@@ -62,7 +63,7 @@ const SecondPart = () => {
               success stories.
             </p>
 
-            <Button variant="primary" href="/addContact">
+            <Button variant="primary" href="/addContact" className="mb-3">
               🤝 Partner With Us
             </Button>
           </Col>
@@ -119,7 +120,7 @@ const SecondPart = () => {
               just for you.
             </p>
 
-            <Button variant="success" href="/packages">
+            <Button variant="success" href="/packages" className="mb-3">
               ✈️ Explore Our Packages
             </Button>
           </Col>

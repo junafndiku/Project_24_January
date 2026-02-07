@@ -1,40 +1,100 @@
+
 .navbarStyle {
   background-image: url("./images/cloud.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  height: 100px;
+  min-height: 100px;
   font-style: oblique;
   font-size: 20px;
   color: white;
   text-transform: uppercase;
   font-weight: 600;
-
   position: relative;
-
 }
 
-.navbarStyle::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  z-index: -1;
-}
-
+/* Ensure container content is above image */
 .navbarStyle .container {
   position: relative;
-  z-index: 2;
+}
+
+.nav-links-custom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end; /* desktop: links stay on the right */
+  width: 100%;
 }
 
 .nav-link-custom {
   color: white;
-  font-size: 20px;
-  margin-left: 10px;
+  font-size: 18px;
+  margin-left: 15px;
+  text-align: center;
+  transition: all 0.2s ease;
 }
 
 .nav-link-custom:hover {
   font-weight: 700;
   color: white;
+}
+
+/* =====================
+   TOGGLER (HAMBURGER)
+===================== */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.6);
+  z-index: 3;
+}
+
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
+
+.navbar-collapse {
+  background: transparent; /* keep background image visible */
+}
+
+@media (max-width: 576px) {
+  .navbarStyle {
+    min-height: auto;
+    padding: 10px 0;
+  }
+
+  /* Center the collapsed menu */
+  .navbar-collapse {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links-custom {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .nav-link-custom {
+    margin: 8px 0;
+    font-size: 16px;
+    width: auto;
+
+    /* Ensure links appear white even in collapsed menu */
+    color: white;
+  }
+
+  /* Apply hover effect on small screens */
+  .nav-link-custom:hover {
+    font-weight: 700;
+    color: white;
+  }
+
+  /* Brand stays white and centered */
+  .navbar-brand-custom {
+    color: white;
+    text-align: center;
+    width: 100%;
+  }
 }

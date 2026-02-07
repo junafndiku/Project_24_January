@@ -44,6 +44,10 @@ const ReadTours = () => {
             <Col
               key={item._id}
               className="mb-5 d-flex justify-content-center"
+              xs={12}   // iPhone SE & small devices: 1 per row
+              sm={6}    // small devices and up: 2 per row
+              md={4}    // medium devices and up: 3 per row
+              
             >
               <PackageInfo {...item} />
             </Col>

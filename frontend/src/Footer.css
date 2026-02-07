@@ -1,7 +1,7 @@
 .footer-background {
   background-image: url("./images/bridge.jpg");
   background-size: cover;
-  background-position: top center; /* shows bridge + sky */
+  background-position: top center; 
   background-repeat: no-repeat;
   padding: 18px 0;
   display: flex;
@@ -9,7 +9,7 @@
 }
 
 .footer-white-box {
-  background-color: rgba(198, 226, 255, 0.88); /* MATCHES bridge blue */
+  background-color: rgba(198, 226, 255, 0.88);
   padding: 25px 45px;
   border-radius: 12px;
   max-width: 900px;
@@ -31,7 +31,6 @@
   text-align: center;
 }
 
-/* Center columns perfectly */
 .footer-white-box .row {
   justify-content: center;
 }

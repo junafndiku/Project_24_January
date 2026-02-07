@@ -14,6 +14,9 @@ const contactS = new mongoose.Schema({
         type: String,
         enum: ["Albania", "Europe", "Middle East", "Far East"],
     },
+    company: {
+        type: String,
+    },
     comment: {
         type: String,
         
